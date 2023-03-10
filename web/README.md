@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+## Circutor Technical Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a very simple application that shows some energy data Helsinki buildings from 1st January 2021 to around 28 Feb 2022.
 
-## Available Scripts
+It has an API written in GO and a frontend written in React.
 
-In the project directory, you can run:
+## Launch
 
-### `npm start`
+Clone/Fork the repo with git clone <url>
+Build the docker containers and launch the project with:
+```sh
+docker-compose up --build
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The api is accessible on `http://localhost:1234/docs/index.html`
+The frontend is accessible on `localhost:3001`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tasks
 
-### `npm test`
+- Implement an error message when login fails
+- Implement a small test for this new feature
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Feel free to implement any other improvement as long as you write a test for it.
 
-### `npm run build`
+## List Redflags
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Write here all red flags that you find in the code. Any examples that would stop a code review. If you want to fix some of them, go on.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Use `form` label and preventDefault event to handle forms data.
+* Create `hooks` and try to reuse common functions, for example email validation.
+* Use `try catch`.
+* Avoid using `callbacks` functions to manage promises.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How you would make this application maintainable and scalable
 
-### `npm run eject`
+Write here all the steps you would take.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* Solid linters configuration to give a consistent code.
+* Add **TypeScript**, it helps to create documentation and helps to keep the code consistent.
+* Create a global state in the app.
+* Create data models, it helps to manage global state.
+* Organize project files and create a solid folder organization.
+* Build a custom component library.
+* I would use **Tailwind** if the requirements allow it, it helps to keep the css consistent.
+* Decouple your logic from components with **hooks**.
+* Keep up the testing coverage.
+* Put in practices clean code and good practices for javascript (SOLID, DRY) and CSS.
+* Avoid using thirds parties libraries unless they are justified.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Test submission
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please, submit this test as a new repository (a fork or a new one) in any free platform you want (bitbucket, gitlab, github, ..)

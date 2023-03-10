@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import Alert from '@mui/material/Alert';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,7 +12,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 
 import { st } from './style';
-import { LoginUser } from '../api/auth'
+import { LoginUser as LoginUserService } from '../api/auth';
 
 const validateEmail = (email) => {
     return String(email)
@@ -22,6 +23,7 @@ const validateEmail = (email) => {
 };
 
 export default function LayoutLogin() {
+    const [hasError, setHasError] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -40,22 +42,29 @@ export default function LayoutLogin() {
         setPassword(e)
     };
 
-    const loginUser = () => {
+    const loginUser = (e) => {
+        e.preventDefault();
+
         if (validateEmail(email) === null) {
-            return
+            setHasError(true)
+            return 
         }
 
-        LoginUser(email, password).then(data => {
-            if (data.token === null) {
-                navigate("/register");
-                navigate(0)
-            } else {
-                localStorage.setItem('test-token', data.Token)
-                localStorage.setItem('email', data.Email)
-                navigate("/buildings");
-                navigate(0)
-            }
-        })
+        try {
+            LoginUserService(email, password).then(data => {
+                if (data.token === null) {
+                    navigate("/register");
+                    navigate(0)
+                } else {
+                    localStorage.setItem('test-token', data.Token)
+                    localStorage.setItem('email', data.Email)
+                    navigate("/buildings");
+                    navigate(0)
+                }
+            })
+        } catch (e) {
+            // show error
+        }
     }
 
     return (
@@ -70,13 +79,14 @@ export default function LayoutLogin() {
                     </Toolbar>
                 </AppBar>
             </Box>
+            { hasError ? <Alert severity="error">Invalid Username or Password</Alert> : null }     
             <Grid container spacing={0} style={{ width: '100%', height: 'calc(100% - 65px)' }} >
                 <Grid item style={{ width: '100%', height: '20%' }} >
 
                 </Grid>
                 <Grid item style={{ width: '100%', height: '10%' }} >
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={st.center}>
-                        Login
+                        Log out
                     </Typography>
                 </Grid>
                 <Grid item style={{ width: '100%', height: '40%' }} >
@@ -103,7 +113,7 @@ export default function LayoutLogin() {
                     </Grid>
                 </Grid>
                 <Grid item style={{ width: '100%', height: '30%' }} >
-
+                    
                 </Grid>
             </Grid>
         </div>
